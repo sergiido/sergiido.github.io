@@ -4,59 +4,70 @@
 		<meta charset=utf-8>
 		<title>Box</title>
 		<style>
-			body { margin: 0; }
-			canvas { width: 100%; height: 100% }
+HTML  CSS   Result
+Edit on 
+*{box-sizing:border-box}
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+@keyframes loader {
+  0% {transform:rotate(-45deg)}
+  50%{transform:rotate(-135deg)}
+  100%{transform:rotate(-225deg)}}
+@keyframes span-1 {
+  0% {transform:translate(0);}
+  50%{transform:translate(-50px, 0);border-color:#EE4D68}
+  100%{transform:translate(0);}}
+@keyframes span-2 {
+  0%{transform:translate(0);}
+  50%{transform:translate(50px, 0);border-color:#875678}
+  100%{transform:translate(0);}}
+@keyframes span-3 {
+  0%{transform:translate(0);}
+  50%{transform:translate(0, -50px);border-color:#FF9900}
+  100%{transform:translate(0);}}
+@keyframes span-4 {
+  0%{transform:translate(0);}
+  50%{transform:translate(0, 50px);border-color:#00E4F6}
+  100%{transform:translate(0);}}
+.loader {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  animation: loader 2s infinite ease-in-out;
+}
+.loader span {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 4px solid #0B1B48;
+}
+.loader span:nth-child(1) {
+  animation: span-1 2s ease-in-out infinite;
+}
+.loader span:nth-child(2) {
+  animation: span-2 2s ease-in-out infinite;
+}
+.loader span:nth-child(3) {
+  animation: span-3 2s ease-in-out infinite;
+}
+.loader span:nth-child(4) {
+  animation: span-4 2s ease-in-out infinite;
+}
 		</style>
 	</head>
 	<body>
-		<script type="text/javascript" src="js/three.min.js"></script>
-		<script>
-
-			var scene = new THREE.Scene();
-			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-			var renderer = new THREE.WebGLRenderer();
-			renderer.setSize( window.innerWidth/2, window.innerHeight/2 );
-			renderer.setClearColor(0x3399ff);
-			document.body.appendChild( renderer.domElement );
-
-			var geometry = new THREE.BoxGeometry( 5, 5, 5 );
-
-var mesh;
-
-var loader = new THREE.TextureLoader();
-//allow cross origin loading
-loader.setCrossOrigin(null);
-// load a resource
-loader.load('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAEDWlDQ1BJQ0MgUHJvZmlsZQAAOI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvuuWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd/p+tt0YdFSBxH2Kz5qgLiI8B8KdVy3YBevqRHz/qWh72Yui3MUDEL3q44WPXw3M+fo1pZuQs4tOIBVVTaoiXEI/MxfhGDPsxsNZfoE1q66ro5aJim3XdoLFw72H+n23BaIXzbcOnz5mfPoTvYVz7KzUl5+FRxEuqkp9G/Ajia219thzg25abkRE/BpDc3pqvphHvRFys2weqvp+krbWKIX7nhDbzLOItiM8358pTwdirqpPFnMF2xLc1WvLyOwTAibpbmvHHcvttU57y5+XqNZrLe3lE/Pq8eUj2fXKfOe3pfOjzhJYtB/yll5SDFcSDiH+hRkH25+L+sdxKEAMZahrlSX8ukqMOWy/jXW2m6M9LDBc31B9LFuv6gVKg/0Szi3KAr1kGq1GMjU/aLbnq6/lRxc4XfJ98hTargX++DbMJBSiYMIe9Ck1YAxFkKEAG3xbYaKmDDgYyFK0UGYpfoWYXG+fAPPI6tJnNwb7ClP7IyF+D+bjOtCpkhz6CFrIa/I6sFtNl8auFXGMTP34sNwI/JhkgEtmDz14ySfaRcTIBInmKPE32kxyyE2Tv+thKbEVePDfW/byMM1Kmm0XdObS7oGD/MypMXFPXrCwOtoYjyyn7BV29/MZfsVzpLDdRtuIZnbpXzvlf+ev8MvYr/Gqk4H/kV/G3csdazLuyTMPsbFhzd1UabQbjFvDRmcWJxR3zcfHkVw9GfpbJmeev9F08WW8uDkaslwX6avlWGU6NRKz0g/SHtCy9J30o/ca9zX3Kfc19zn3BXQKRO8ud477hLnAfc1/G9mrzGlrfexZ5GLdn6ZZrrEohI2wVHhZywjbhUWEy8icMCGNCUdiBlq3r+xafL549HQ5jH+an+1y+LlYBifuxAvRN/lVVVOlwlCkdVm9NOL5BE4wkQ2SMlDZU97hX86EilU/lUmkQUztTE6mx1EEPh7OmdqBtAvv8HdWpbrJS6tJj3n0CWdM6busNzRV3S9KTYhqvNiqWmuroiKgYhshMjmhTh9ptWhsF7970j/SbMrsPE1suR5z7DMC+P/Hs+y7ijrQAlhyAgccjbhjPygfeBTjzhNqy28EdkUh8C+DU9+z2v/oyeH791OncxHOs5y2AtTc7nb/f73TWPkD/qwBnjX8BoJ98VVBg/m8AAACTSURBVFgJ7ZhBCoAgFAU1OlidLDtZRyuUjGrZEPzFBGEYY8/prcxlSnsKfA2Bs7VoYw+4bLFErnNu0R4G++SXsTLvu37hy1pdWh0fAe8vojwbkP4JDWqQGqC8HdQgNUB5O6hBaoDydlCD1ADl7aAGqQHK20ENUgOUt4MapAYobwepwVzOQ/SoR8BXQLrTv/jwHTwAtasayY9N7ScAAAAASUVORK5CYII=',
-    // Function when resource is loaded
-    function ( texture ) {
-		var material = new THREE.MeshLambertMaterial({map: texture});
-		mesh = new THREE.Mesh(geometry, material);
-		scene.add(mesh);
-
-		// var material = new THREE.MeshLambertMaterial( { color: 0xf6546a} ); //, wireframe: true 
-		// var mesh = new THREE.Mesh( geometry, material );
-		// scene.add( mesh ); // Add the mesh at (0, 0, 0)
-
-		var light = new THREE.PointLight(0xffffff);
-		light.position.set(0, 0, 5);
-		scene.add(light);
-
-		camera.position.z = 10;
-
-
-		function animate() {
-			requestAnimationFrame( animate );
-			renderer.render( scene, camera );
-			mesh.rotation.x += 0.05;
-			mesh.rotation.y += 0.05;
-		}
-		animate();		
-    }
-);
-		
-
-		</script>
+		<div class="loader">
+		  <span></span>
+		  <span></span>
+		  <span></span>
+		  <span></span>
+		</div>
 	</body>
 </html>
