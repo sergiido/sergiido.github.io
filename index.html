@@ -12,6 +12,26 @@
 		    background-size: 2em 2em;
 		    background-position: center center;
 		}
+		svg {
+			border: 1px solid gold;
+		}
+
+		@keyframes bounce {
+			0%   {transform: translate(0, 0) scale(1, 1);}
+			90%  {transform: translate(0, 150px) scale(1, 1);}
+			100% {transform: translate(0, 155px) scale(1.02, 0.95) ;}
+		}
+
+		.ball>svg {
+		  /* ... */
+		  position: absolute;
+		  top: 7.2%;
+		  left: 16%;
+		  border: 1px solid transparent !important;
+		  animation: bounce 1s ease-in;
+		  animation-direction: alternate;
+		  animation-iteration-count: infinite;
+		}		
 
 	</style>
 </head>
